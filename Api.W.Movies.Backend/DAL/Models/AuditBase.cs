@@ -8,8 +8,8 @@ namespace Api.W.Movies.Backend.DAL.Models
         [Key]
         public virtual int Id { get; set; }
 
-        public virtual DateTime CreateDate { get; set; }
+        public virtual DateTime? CreateDate { get; set; }
 
-        public virtual DateTime ModifiedDate { get; set; }
+        public virtual DateTime? ModifiedDate { get; set; }
     }
 }

@@ -16,10 +16,12 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<ICollection<Category>> GetCategoryAsync()
     {
-        return await _context.Categories
-            .AsNoTracking()
-            .OrderBy(c => c.Name)
-            .ToListAsync();
+        var categories= await _context.Categories
+             .AsNoTracking()
+             .OrderBy(c => c.Name)
+             .ToListAsync();
+
+        return categories;
     }
 
     public async Task<Category> GetCategoryAsync(int id)
@@ -49,7 +51,7 @@ public class CategoryRepository : ICategoryRepository
 
         var categry = await _context.Categories.AddAsync(category);
 
-        return await SaveAsync()
+        return await SaveAsync();
     }
 
     public async Task<bool> UpdateCategoryAsync(Category category)
