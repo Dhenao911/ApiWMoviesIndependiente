@@ -39,14 +39,17 @@ namespace Api.W.Movies.Backend.Services
             return _mapper.Map<ICollection<CategoryDto>>(categories);
         }
 
-        public Task<Category> GetCategoryAsync(int id)
+        public async Task<CategoryDto> GetCategoryAsync(int id)
         {
-            throw new NotImplementedException();
+            var categories = await _categoryRepository.GetCategoryAsync(id);
+            return _mapper.Map<CategoryDto>(categories);
         }
 
-        public Task<Category> GetCategoryAsync(string name)
+        public async Task<CategoryDto> GetCategoryAsync(string name)
         {
-            throw new NotImplementedException();
+            var category= await _categoryRepository.GetCategoryAsync(name);
+
+            return _mapper.Map<CategoryDto>(category);
         }
 
         public Task<bool> GetCategoyExistsByNameAsync(string name)

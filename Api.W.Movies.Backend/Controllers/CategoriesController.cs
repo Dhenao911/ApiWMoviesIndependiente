@@ -25,4 +25,28 @@ public class CategoriesController : ControllerBase
         var categories = await _categoryServices.GetCategoryAsync();
         return Ok(categories);
     }
+
+    [HttpGet("{id:int}", Name ="GetCategoryAsync(int id)")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<CategoryDto>> GetCategoryAsync(int id)
+    {
+        var categories = await _categoryServices.GetCategoryAsync(id);
+        return Ok(categories);
+    }
+
+    [HttpGet("{name}",Name ="GetCategoryAsync(string name)")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<CategoryDto>> GetCategoryAsync(string name)
+    {
+        var categories = await _categoryServices.GetCategoryAsync(name);
+        return Ok(categories);
+    }
 }

@@ -7,9 +7,9 @@ namespace Api.W.Movies.Backend.Services.IServices
     {
         Task<ICollection<CategoryDto>> GetCategoryAsync();
 
-        Task<Category> GetCategoryAsync(int id);
+        Task<CategoryDto> GetCategoryAsync(int id);
 
-        Task<Category> GetCategoryAsync(string name);
+        Task<CategoryDto  > GetCategoryAsync(string name);
 
         Task<bool> CategotyExistsByIdAsync(int id);
 

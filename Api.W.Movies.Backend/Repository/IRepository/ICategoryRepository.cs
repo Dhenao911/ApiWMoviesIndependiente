@@ -8,6 +8,9 @@ public interface ICategoryRepository
 
     Task<Category> GetCategoryAsync(int id); //Me retorna una categoria por id
 
+    Task<Category> GetCategoryAsync(string name); //Me retorna una categoria por name
+
+
     Task<bool> CategoryExistsByIdAsync(int id);//Me verifica si una categoria existe por id
 
     Task<bool> CategoryExistsByNameAsync(string name);//Me verifica si una categoria existe por id

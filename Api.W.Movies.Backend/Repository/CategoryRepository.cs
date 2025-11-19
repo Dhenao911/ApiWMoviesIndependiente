@@ -16,7 +16,7 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<ICollection<Category>> GetCategoryAsync()
     {
-        var categories= await _context.Categories
+        var categories = await _context.Categories
              .AsNoTracking()
              .OrderBy(c => c.Name)
              .ToListAsync();
@@ -29,6 +29,13 @@ public class CategoryRepository : ICategoryRepository
         return await _context.Categories
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id);
+    }
+
+    public async Task<Category> GetCategoryAsync(string name)
+    {
+        return await _context.Categories
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Name.ToLower() == name);
     }
 
     public async Task<bool> CategoryExistsByIdAsync(int id)
