@@ -3,6 +3,7 @@ using Api.W.Movies.Backend.DAL.Models.Dtos;
 using Api.W.Movies.Backend.Repository.IRepository;
 using Api.W.Movies.Backend.Services.IServices;
 using AutoMapper;
+using System.Data;
 
 namespace Api.W.Movies.Backend.Services
 {
@@ -22,9 +23,30 @@ namespace Api.W.Movies.Backend.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> CreateCategoryAsync(Category category)
+        public async Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto categoryCreateDto)
         {
-            throw new NotImplementedException();
+            //validar si la categoria exite
+
+           var categoryExist= await _categoryRepository.CategoryExistsByNameAsync(categoryCreateDto.Name.ToLower());
+
+            if (categoryExist)
+            {
+                throw new InvalidOperationException($"Ya existe una categoria con el nombre de '{categoryCreateDto.Name}´");
+            }
+
+
+            //Mapear el dto a la entidad
+
+            var category= _mapper.Map<Category>(categoryCreateDto);
+
+            var categoryCreate = await _categoryRepository.CreateCategoryAsync(category);
+
+            if (!categoryCreate)
+            {
+                throw new Exception("Ocurrio un error al crear la categoria");
+            }
+
+            return _mapper.Map<CategoryDto>(category);
         }
 
         public Task<bool> DeleteCategoryAsync(int id)
@@ -57,7 +79,7 @@ namespace Api.W.Movies.Backend.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateCategoryAsync(Category category)
+        public Task<CategoryDto> UpdateCategoryAsync(int id, CategoryDto categoryDto)
         {
             throw new NotImplementedException();
         }
